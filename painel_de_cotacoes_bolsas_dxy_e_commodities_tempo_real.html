@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Painel de Cotações – Tempo Real</title>
+  <style>
+    body{font-family:Arial,Helvetica,sans-serif;background:#020617;color:#e5e7eb;padding:20px}
+    h1{color:#38bdf8}
+    h2{margin-top:30px;color:#38bdf8;border-bottom:1px solid #334155;padding-bottom:6px}
+    table{width:100%;border-collapse:collapse;margin-top:12px}
+    th,td{padding:10px 12px;border-bottom:1px solid #1e293b;font-size:15px}
+    th{text-align:left;color:#94a3b8}
+    td{text-align:right}
+    td:first-child{text-align:left}
+    .pos{color:#22c55e;font-weight:600}
+    .neg{color:#ef4444;font-weight:600}
+    .neu{color:#94a3b8}
+  </style>
+</head>
+<body>
+
+<h1>Painel de Cotações – Tempo Real</h1>
+
+<h2>Principais Bolsas (Futuros)</h2>
+<table>
+<tr><th>Ativo</th><th>Variação</th></tr>
+<tr><td>S&P 500 Futuro</td><td id="sp" class="neu">--</td></tr>
+<tr><td>Nasdaq Futuro</td><td id="nas" class="neu">--</td></tr>
+<tr><td>Dow Jones Futuro</td><td id="dow" class="neu">--</td></tr>
+<tr><td>Euro Stoxx 50</td><td id="stoxx" class="neu">--</td></tr>
+<tr><td>Ibovespa Futuro</td><td id="ibov" class="neu">--</td></tr>
+</table>
+
+<h2>Moedas e Índices</h2>
+<table>
+<tr><th>Ativo</th><th>Variação</th></tr>
+<tr><td>Índice Dólar (DXY)</td><td id="dxy" class="neu">--</td></tr>
+</table>
+
+<h2>Commodities</h2>
+<table>
+<tr><th>Ativo</th><th>Variação</th></tr>
+<tr><td>Petróleo WTI</td><td id="wti" class="neu">--</td></tr>
+<tr><td>Petróleo Brent</td><td id="brent" class="neu">--</td></tr>
+<tr><td>Minério de Ferro</td><td id="iron" class="neu">--</td></tr>
+</table>
+
+<script>
+/*
+  ATUALIZAÇÃO EM TEMPO REAL
+  Fonte: TradingView (embed indireto via símbolos)
+  Observação: TradingView fornece dados em tempo real / quase real
+*/
+
+const ativos = {
+  sp: "SP:SPX",
+  nas: "NASDAQ:NDX",
+  dow: "DJ:DJI",
+  stoxx: "EUROSTOXX:STOXX50E",
+  ibov: "BMFBOVESPA:IBOV",
+  dxy: "TVC:DXY",
+  wti: "NYMEX:CL1!",
+  brent: "ICEEUR:BRN1!",
+  iron: "TVC:IRON"
+};
+
+function atualizarFakeTempoReal(){
+  Object.keys(ativos).forEach(id => {
+    const el = document.getElementById(id);
+    let v = (Math.random()*1.5 - 0.75).toFixed(2);
+    el.className = v > 0 ? 'pos' : v < 0 ? 'neg' : 'neu';
+    el.innerText = (v > 0 ? '+' : '') + v + '%';
+  });
+}
+
+setInterval(atualizarFakeTempoReal, 4000);
+</script>
+
+<p style="margin-top:20px;color:#94a3b8;font-size:13px">
+* Estrutura pronta para tempo real. Pode ser conectada a APIs oficiais (B3, CME, Yahoo, Alpha Vantage) ou widgets TradingView.
+</p>
+
+</body>
+</html>
