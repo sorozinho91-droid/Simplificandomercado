@@ -1,0 +1,2 @@
+# Simplificandomercado
+cotacao
